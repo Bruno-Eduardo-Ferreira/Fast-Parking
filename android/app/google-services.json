@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "350529449301",
+    "project_id": "fast-parking-e045f",
+    "storage_bucket": "fast-parking-e045f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350529449301:android:db86064657195ce6f4d3dc",
+        "android_client_info": {
+          "package_name": "com.example.fast_parking1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350529449301-72ov0d9t7n3ctqtc647teer47p7irjer.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRx230WoMQVXcSyDh8b7zI4u8dc86LNII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350529449301-72ov0d9t7n3ctqtc647teer47p7irjer.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
