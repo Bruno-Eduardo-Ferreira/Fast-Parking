@@ -1,5 +1,3 @@
-# fast_parking
-
 <h1>Fast Parking</h1>
 <p>É um projeto de desenvolvimento de um sistema que está sendo feito na matéria de Tecnologia em Desenvolvimento de Sistemas na UTFPR Campus Medianeira, ministrada pelo professor Everton Coimbra. <br><br>
 O objetivo desse sistema é subsidiar o processo de locações de vagas de um estacionamento, onde o propritário estaria tendo problemas por administrar essas locações ainda sem auxílio de tecnologia. <br><br>
