@@ -48,7 +48,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration( 
-                                border: Border.all(width: 0.5, color: Colors.amber.shade200),
+                                border: Border.all(width: 0.5, color: Colors.black38),
                                 borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                 color: Colors.white,
                               ),
