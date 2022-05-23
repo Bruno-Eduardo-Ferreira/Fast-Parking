@@ -5,4 +5,4 @@ O objetivo desse sistema é subsidiar o processo de locações de vagas de um es
  <div><img src= https://user-images.githubusercontent.com/102911080/163677911-b325257f-f747-4b48-be9b-a17522150aae.png /></div>
  <p><br> Documentos do projeto: <br> </p>
  <div>Sumário Executivo: (https://github.com/Bruno-Eduardo-Ferreira/Fast-Parking/files/8500048/Sumario.Executivo.docx)</div>
- <div>Cronograma: (https://github.com/Bruno-Eduardo-Ferreira/Fast-Parking/files/8500089/Cronograma.xlsx)</div>
+ <div>Cronograma: (https://github.com/Bruno-Eduardo-Ferreira/Fast-Parking/files/8750591/Cronograma.xlsx)</div>
