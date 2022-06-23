@@ -1,8 +1,8 @@
-import 'package:fast_parking1/presentation/pages/home/home_page.dart';
-import 'package:fast_parking1/presentation/pages/login/login_page.dart';
-import 'package:fast_parking1/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../services/auth_service.dart';
+import '../ui/pages/home/home_page.dart';
+import '../ui/pages/login/login_page.dart';
 
 class AuthCheck extends StatefulWidget {
   const AuthCheck({Key? key}) : super(key: key);
