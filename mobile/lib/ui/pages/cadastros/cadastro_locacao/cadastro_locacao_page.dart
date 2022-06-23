@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 // ignore: avoid_relative_lib_imports
-import '../../../../../../presentation/lib/pages/cadastros/cadastro_vacina/cadastro_vacina_presentar.dart';
+import '../../../../../../presentation/lib/pages/cadastros/cadastro_locacao/cadastro_locacao_presentar.dart';
 import '../../home/home_page.dart';
 
-class CadastroVacina extends StatefulWidget {
-  const CadastroVacina({Key? key}) : super(key: key);
+class CadastroLocacao extends StatefulWidget {
+  const CadastroLocacao({Key? key}) : super(key: key);
 
   @override
-  State<CadastroVacina> createState() => _CadastroVacinaState();
+  State<CadastroLocacao> createState() => _CadastroLocacaoState();
 }
 
-class _CadastroVacinaState extends State<CadastroVacina> {
-  final ICadastroVacina presenter = ICadastroVacina();
+class _CadastroLocacaoState extends State<CadastroLocacao> {
+  final ICadastroLocacao presenter = ICadastroLocacao();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final nomeVacina = TextEditingController();
   final dataAplicado = TextEditingController();
@@ -28,12 +28,13 @@ class _CadastroVacinaState extends State<CadastroVacina> {
   DateTime? dataAtual = DateTime.now();
   num? tempoDigitado;
 
-  String? selectPet;
-  String? selectDono;
-  String? selectTempo;
+  String? selectedPagamento;
+  String? selectedDono;
+  String? selectedTempo;
   bool? flagTempo;
 
-  final tempo = ['Dia', 'Mês'];
+  final selectTempo = ['Dia', 'Mês'];
+  final selectPagamento = ['à Vista', 'Cartão / crédito', 'Cartão / débito'];
 
   void attDono() {
     setState(() {
@@ -48,7 +49,7 @@ class _CadastroVacinaState extends State<CadastroVacina> {
   }
 
   void clearSelectPet(){
-    selectPet = null;
+    selectedPagamento = null;
   }
 
   @override
@@ -100,12 +101,12 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const Text(
-                                'Dono do pet:    ',
+                                'Dono da locação:    ',
                                 style: TextStyle(fontSize: 16),
                               ),
                               DropdownButton(
-                                hint: const Text("Selecione o dono do pet"),
-                                value: selectDono,
+                                hint: const Text("Selecione o dono"),
+                                value: selectedDono,
                                 items: presenter.clientesCadastrados
                                     .map((username) {
                                   return DropdownMenuItem(
@@ -117,10 +118,10 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                                 }).toList(),
                                 onChanged: (valuename) {
                                   setState(() {
-                                    selectDono = valuename as String;
+                                    selectedDono = valuename as String;
                                   });
-                                  presenter.getUserID(selectDono!);
-                                  presenter.getPets(attPet, clearSelectPet, selectDono!);
+                                  presenter.getUserID(selectedDono!);
+                                  presenter.getPets(attPet, clearSelectPet, selectedDono!);
                                 },
                               ),
                             ],
@@ -131,13 +132,13 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const Text(
-                                'Pet:    ',
+                                'Pagamento:    ',
                                 style: TextStyle(fontSize: 16),
                               ),
                               DropdownButton(
-                                hint: const Text("Selecione o pet"),
-                                value: selectPet,
-                                items: presenter.petsCadastrados.map((petname) {
+                                hint: const Text("Selecione a forma"),
+                                value: selectedPagamento,
+                                items: selectPagamento.map((petname) {
                                   return DropdownMenuItem(
                                       value: petname,
                                       child: Text(
@@ -147,35 +148,34 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                                 }).toList(),
                                 onChanged: (valuename) {
                                   setState(() {
-                                    selectPet = valuename as String;
+                                    selectedPagamento = valuename as String;
                                   });
-                                  presenter.getPetID(selectPet!, selectDono!);
                                 },
                               ),
                             ],
                           )),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
-                        child: TextFormField(
-                            controller: nomeVacina,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Nome da vacina',
-                            ),
-                            keyboardType: TextInputType.name,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Informe algum nome!';
-                              } else if (value.length > 80) {
-                                return 'São permitidos no máximo 80 caracteres para o nome!';
-                              }
-                              nomeVacinaDigitado = value;
-                              return null;
-                            }),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                      //   child: TextFormField(
+                      //       controller: nomeVacina,
+                      //       decoration: const InputDecoration(
+                      //         border: OutlineInputBorder(),
+                      //         labelText: 'Nome da vacina',
+                      //       ),
+                      //       keyboardType: TextInputType.name,
+                      //       validator: (value) {
+                      //         if (value!.isEmpty) {
+                      //           return 'Informe algum nome!';
+                      //         } else if (value.length > 80) {
+                      //           return 'São permitidos no máximo 80 caracteres para o nome!';
+                      //         }
+                      //         nomeVacinaDigitado = value;
+                      //         return null;
+                      //       }),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 12, 24, 12),
-                        child: Text('Data de aplicação: $dataPtVacAplicado.',
+                        child: Text('Data de início: $dataPtVacAplicado.',
                             style: const TextStyle(fontSize: 16)),
                       ),
                       Padding(
@@ -189,8 +189,8 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                             ),
                             DropdownButton(
                               hint: const Text('Selecione o tempo'),
-                              value: selectTempo,
-                              items: tempo.map((itemsname) {
+                              value: selectedTempo,
+                              items: selectTempo.map((itemsname) {
                                 return DropdownMenuItem(
                                     value: itemsname,
                                     child: Text(
@@ -199,12 +199,12 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                                     ));
                               }).toList(),
                               onChanged: (value) {
-                                selectTempo = value as String;
-                                selectTempo == 'Dia'
+                                selectedTempo = value as String;
+                                selectedTempo == 'Dia'
                                     ? flagTempo = true
                                     : flagTempo = false;
                                 setState(() {
-                                  selectTempo = value;
+                                  selectedTempo = value;
                                 });
                               },
                             ),
@@ -281,7 +281,7 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
                               formKey.currentState?.save();
-                              if (selectPet != null &&
+                              if (selectedPagamento != null &&
                                   nomeVacinaDigitado != null &&
                                   dataVacAplicado != null &&
                                   dataVacVencimento != null) {
@@ -290,7 +290,7 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                                     dataVacAplicado!,
                                     dataVacVencimento!,
                                     presenter.idUser,
-                                    selectPet!);
+                                    selectedPagamento!);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => const HomePage()));
                               }

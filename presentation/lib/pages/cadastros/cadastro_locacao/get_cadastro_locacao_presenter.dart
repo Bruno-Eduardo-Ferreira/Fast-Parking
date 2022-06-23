@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'cadastro_vacina_presentar.dart';
+import 'cadastro_locacao_presentar.dart';
 
-class GetCadastroVacina implements ICadastroVacina {
+class GetCadastroLocacao implements ICadastroLocacao {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String _idPet = '';

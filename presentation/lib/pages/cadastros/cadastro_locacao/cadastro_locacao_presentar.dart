@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-import 'get_cadastro_vacina_presenter.dart';
+import 'get_cadastro_locacao_presenter.dart';
 
-abstract class ICadastroVacina {
-  factory ICadastroVacina() => GetCadastroVacina();
+abstract class ICadastroLocacao {
+  factory ICadastroLocacao() => GetCadastroLocacao();
 
   String get idUser;
   set idUser(String idUser);
