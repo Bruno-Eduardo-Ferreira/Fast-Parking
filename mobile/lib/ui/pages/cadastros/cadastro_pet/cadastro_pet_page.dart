@@ -56,7 +56,7 @@ class _CadastroPetState extends State<CadastroPet> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Cadastro de pets',
+              'Cadastro de veículos',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             Hero(
@@ -69,8 +69,7 @@ class _CadastroPetState extends State<CadastroPet> {
             )
           ],
         ),
-      ),
-      backgroundColor: Colors.blue.shade50,
+      ),      
       body: SafeArea(
         child: SingleChildScrollView(
           reverse: true,
@@ -301,7 +300,7 @@ class _CadastroPetState extends State<CadastroPet> {
                               Padding(
                                 padding: EdgeInsets.all(16),
                                 child: Text(
-                                  'Cadastrar pet',
+                                  'Cadastrar veículo',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),

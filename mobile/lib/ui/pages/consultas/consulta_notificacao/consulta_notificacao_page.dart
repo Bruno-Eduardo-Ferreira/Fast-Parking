@@ -49,7 +49,6 @@ class _ConsultaVacinaState extends State<ConsultaVacina> {
           ],
         ),
       ),
-      backgroundColor: Colors.blue.shade50,
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.only(top: 40),

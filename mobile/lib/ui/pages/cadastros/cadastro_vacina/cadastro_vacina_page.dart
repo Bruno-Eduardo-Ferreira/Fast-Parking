@@ -68,7 +68,7 @@ class _CadastroVacinaState extends State<CadastroVacina> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Cadastro de vacinas',
+              'Cadastro de locações',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             Hero(
@@ -82,7 +82,6 @@ class _CadastroVacinaState extends State<CadastroVacina> {
           ],
         ),
       ),
-      backgroundColor: Colors.blue.shade50,
       body: SafeArea(
         child: SingleChildScrollView(
           reverse: true,
@@ -306,7 +305,7 @@ class _CadastroVacinaState extends State<CadastroVacina> {
                               Padding(
                                 padding: EdgeInsets.all(16),
                                 child: Text(
-                                  'Cadastrar vacina',
+                                  'Cadastrar locação',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),

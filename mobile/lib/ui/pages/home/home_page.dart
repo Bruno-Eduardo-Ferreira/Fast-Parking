@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
       body: SafeArea(
         child: SingleChildScrollView(
           reverse: true,
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Center(
                 child: Text(
-                  'Home Vacpet',
+                  'Home Fast-Parking',
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -129,11 +128,11 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Icon(Icons.pets_outlined),
+                                Icon(Icons.car_repair),
                                 Padding(
                                   padding: EdgeInsets.all(8),
                                   child: Text(
-                                    'Cadastrar pet',
+                                    'Cadastrar veículo',
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),
@@ -156,11 +155,11 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Icon(Icons.vaccines_rounded),
+                                Icon(Icons.local_parking_outlined),
                                 Padding(
                                   padding: EdgeInsets.all(8),
                                   child: Text(
-                                    'Cadastrar vacina',
+                                    'Cadastrar locação',
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),
@@ -302,11 +301,11 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Icon(Icons.vaccines_rounded),
+                                Icon(Icons.notification_important_outlined),
                                 Padding(
                                   padding: EdgeInsets.all(8),
                                   child: Text(
-                                    'Notificar vencimento de vacina',
+                                    'Notificar vencimento de locação',
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),

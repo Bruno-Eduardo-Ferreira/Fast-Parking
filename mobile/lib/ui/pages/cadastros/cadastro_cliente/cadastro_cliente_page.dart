@@ -50,7 +50,6 @@ class _CadastroClienteState extends State<CadastroCliente> {
           ],
         ),
       ),
-      backgroundColor: Colors.blue.shade50,
       body: SafeArea(
         child: SingleChildScrollView(
           reverse: true,

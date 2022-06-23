@@ -70,7 +70,6 @@ class _EdicaoClienteState extends State<EdicaoCliente> {
           ],
         ),
       ),
-      backgroundColor: Colors.blue.shade50,
       body: SafeArea(
         child: SingleChildScrollView(
           reverse: true,
