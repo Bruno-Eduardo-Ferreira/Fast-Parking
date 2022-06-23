@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../../services/auth_service.dart';
+import '../cadastros/cadastro_carro/cadastro_carro_page.dart';
 import '../cadastros/cadastro_cliente/cadastro_cliente_page.dart';
-import '../cadastros/cadastro_pet/cadastro_pet_page.dart';
 import '../cadastros/cadastro_vacina/cadastro_vacina_page.dart';
 import '../consultas/consulta_cliente/consulta_cliente_page.dart';
 import '../consultas/consulta_notificacao/consulta_notificacao_page.dart';
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                   context,
                   PageRouteBuilder(
                       transitionDuration: const Duration(milliseconds: 500),
-                      pageBuilder: (_, __, ___) => const CadastroPet()));
+                      pageBuilder: (_, __, ___) => const CadastroCarro()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
