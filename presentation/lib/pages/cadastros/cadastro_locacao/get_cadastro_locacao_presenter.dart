@@ -5,11 +5,11 @@ import 'cadastro_locacao_presentar.dart';
 class GetCadastroLocacao implements ICadastroLocacao {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  String _idPet = '';
+  String _idCarro = '';
   @override
-  String get idPet => _idPet;
+  String get idCarro => _idCarro;
   @override
-  set idPet(String idPet) => _idPet = idPet;
+  set idCarro(String idCarro) => _idCarro = idCarro;
 
   String _idUser = '';
   @override
@@ -24,43 +24,30 @@ class GetCadastroLocacao implements ICadastroLocacao {
   set clientesCadastrados(List clientesCadastrados) =>
       _clientesCadastrados = clientesCadastrados;
 
-  List _petsCadastrados = [];
+  List _carrosCadastrados = [];
   @override
-  List get petsCadastrados => _petsCadastrados;
+  List get carrosCadastrados => _carrosCadastrados;
   @override
-  set petsCadastrados(List petsCadastrados) =>
-      _petsCadastrados = petsCadastrados;
+  set carrosCadastrados(List carrosCadastrados) =>
+      _carrosCadastrados = carrosCadastrados;
 
   @override
-  Future addVacina(String nomeVacina, DateTime dataAplicado,
-      DateTime dataVencimento, String idUser, nomePetAplicado) async {
+  Future addLocacao(DateTime dataInicio,
+      DateTime dataVencimento, String idUser, String idCarro, String formaPagamento) async {
     await _firestore
         .collection('clientes')
         .doc(idUser)
-        .collection('pets')
-        .doc(idPet)
-        .collection('vacinas')
+        .collection('locacoes')
         .add({
       'idUser': idUser,
-      'idPet': idPet,
-      'nomeVacina': nomeVacina,
-      'dataAplicado': dataAplicado,
+      'idCarro': idCarro,
+      'dataInicio': dataInicio,
       'dataVencimento': dataVencimento,
-      'nomePet': nomePetAplicado,
+      'formaPagamento': formaPagamento,
       'status': 'await',
     });
   }
 
-  @override
-  Future getPetID(String pet, String user) async {
-    var colletion = _firestore.collectionGroup('pets');
-    var result = await colletion.get();
-    for (var doc in result.docs) {
-      if (doc['nomePet'] == pet && doc['nomeDono'] == user) {
-        idPet = doc.id;
-      }
-    }
-  }
 
   @override
   Future getUsers(VoidCallback attdono) async {
@@ -84,15 +71,20 @@ class GetCadastroLocacao implements ICadastroLocacao {
   }
 
   @override
-  Future getPets(VoidCallback attpet, VoidCallback clearSelectPet, String pet) async {
-    var colletion = FirebaseFirestore.instance.collectionGroup('pets');
-    var result = await colletion.get();
-    clearSelectPet();
-    petsCadastrados.clear();
-    for (var doc in result.docs) {
-      if (doc['nomeDono'] == pet) {
-        petsCadastrados.add(doc['nomePet']);
-        attpet();
+  Future getCarros(VoidCallback attCarro) async {
+    var colletion = await _firestore.collection('carros').get();
+    for (var doc in colletion.docs) {
+        carrosCadastrados.add(doc['placa']);
+        attCarro();
+    }
+  }
+
+  @override
+  Future getCarroID(String carro) async {
+    var colletion = await _firestore.collection('carros').get();
+    for (var doc in colletion.docs) {
+      if (doc['placa'] == carro) {
+        idCarro = doc.id;
       }
     }
   }

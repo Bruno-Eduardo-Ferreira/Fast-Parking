@@ -16,20 +16,20 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
   final ICadastroLocacao presenter = ICadastroLocacao();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final nomeVacina = TextEditingController();
-  final dataAplicado = TextEditingController();
-  final dataVencimento = TextEditingController();
+  final dataAplicadoCotroller = TextEditingController();
+  final dataVencimentoController = TextEditingController();
   final dias = TextEditingController();
 
-  String? nomeVacinaDigitado;
-  DateTime? dataVacAplicado = DateTime.now();
-  DateTime? dataVacVencimento;
-  String? dataPtVacAplicado;
-  String? dataPtVacVencimento;
+  DateTime? dataInicio = DateTime.now();
+  DateTime? dataVencimento;
+  String? dataPtInicio;
+  String? dataPtVencimento;
   DateTime? dataAtual = DateTime.now();
   num? tempoDigitado;
 
   String? selectedPagamento;
   String? selectedDono;
+  String? selectedCarro;
   String? selectedTempo;
   bool? flagTempo;
 
@@ -42,9 +42,9 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
     });
   }
 
-  void attPet() {
+  void attCarro() {
     setState(() {
-      presenter.petsCadastrados;
+      presenter.carrosCadastrados;
     });
   }
 
@@ -55,13 +55,14 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
   @override
   void initState() {
     presenter.getUsers(attDono);
+    presenter.getCarros(attCarro);
     super.initState();
     initializeDateFormatting();
   }
 
   @override
   Widget build(BuildContext context) {
-    dataPtVacAplicado =
+    dataPtInicio =
         DateFormat(DateFormat.YEAR_MONTH_DAY, 'pt_Br').format(dataAtual!);
     return Scaffold(
       appBar: AppBar(
@@ -121,11 +122,42 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                                     selectedDono = valuename as String;
                                   });
                                   presenter.getUserID(selectedDono!);
-                                  presenter.getPets(attPet, clearSelectPet, selectedDono!);
                                 },
                               ),
                             ],
-                          )),
+                          ),
+                          ),
+                      Padding(
+                          padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Veículo:    ',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              DropdownButton(
+                                hint: const Text("Selecione o veículo"),
+                                value: selectedCarro,
+                                items: presenter.carrosCadastrados
+                                    .map((username) {
+                                  return DropdownMenuItem(
+                                      value: username,
+                                      child: Text(
+                                        username,
+                                        style: const TextStyle(fontSize: 24),
+                                      ));
+                                }).toList(),
+                                onChanged: (valuename) {
+                                  setState(() {
+                                    selectedCarro = valuename as String;
+                                  });
+                                  presenter.getCarroID(selectedCarro!);
+                                },
+                              ),
+                            ],
+                          ),
+                          ),
                       Padding(
                           padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
                           child: Row(
@@ -175,7 +207,7 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                       // ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 12, 24, 12),
-                        child: Text('Data de início: $dataPtVacAplicado.',
+                        child: Text('Data de início: $dataPtInicio.',
                             style: const TextStyle(fontSize: 16)),
                       ),
                       Padding(
@@ -231,19 +263,19 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             } else {
                               return 'Informe o tempo no campo superior!';
                             }
-                            dataVacVencimento = dataAtual!
+                            dataVencimento = dataAtual!
                                 .add(Duration(days: tempoDigitado as int));
-                            dataPtVacVencimento =
+                            dataPtVencimento =
                                 DateFormat(DateFormat.YEAR_MONTH_DAY, 'pt_Br')
-                                    .format(dataVacVencimento!);
+                                    .format(dataVencimento!);
                             return null;
                           },
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
-                        child: dataPtVacVencimento != null
-                            ? Text('Data de vencimento: $dataPtVacVencimento.',
+                        child: dataPtVencimento != null
+                            ? Text('Data de vencimento: $dataPtVencimento.',
                                 style: const TextStyle(fontSize: 16))
                             : const Text('Sem data de vencimento.'),
                       ),
@@ -254,7 +286,7 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             if (formKey.currentState!.validate()) {
                               formKey.currentState?.save();
                               setState(() {
-                                dataPtVacVencimento;
+                                dataPtVencimento;
                               });
                             } else {
                               FocusManager.instance.primaryFocus?.unfocus();
@@ -282,14 +314,13 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             if (formKey.currentState!.validate()) {
                               formKey.currentState?.save();
                               if (selectedPagamento != null &&
-                                  nomeVacinaDigitado != null &&
-                                  dataVacAplicado != null &&
-                                  dataVacVencimento != null) {
-                                await presenter.addVacina(
-                                    nomeVacinaDigitado!,
-                                    dataVacAplicado!,
-                                    dataVacVencimento!,
+                                  dataInicio != null &&
+                                  dataVencimento != null) {
+                                await presenter.addLocacao(
+                                    dataInicio!,
+                                    dataVencimento!,
                                     presenter.idUser,
+                                    presenter.idCarro,
                                     selectedPagamento!);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => const HomePage()));
