@@ -16,16 +16,13 @@ class _CadastroCarroState extends State<CadastroCarro> {
   final marca = TextEditingController();
   final modelo = TextEditingController();
   final cor = TextEditingController();
-  final tipo = TextEditingController();
   final placa = TextEditingController();
 
   String? marcaDigitado;
   String? modeloDigitado;
   String? corDigitado;
-  String? tipoDigitado;
   String? placaDigitado;
 
-  final selectTipo = ['Particular', 'Aluguel'];
   final selectMarca = [
     'Agrale',
     'Aston',
@@ -159,36 +156,6 @@ class _CadastroCarroState extends State<CadastroCarro> {
                             }),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(34, 6, 24, 6),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Tipo do veículo:    ',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            DropdownButton(
-                              hint: const Text('Selecione um tipo'),
-                              value: selectedTipo,
-                              items: selectTipo.map((itemsname) {
-                                return DropdownMenuItem(
-                                    value: itemsname,
-                                    child: Text(
-                                      itemsname,
-                                      style: const TextStyle(fontSize: 24),
-                                    ));
-                              }).toList(),
-                              onChanged: (value) {
-                                tipoDigitado = value as String;
-                                setState(() {
-                                  selectedTipo = value;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
                         padding: const EdgeInsets.fromLTRB(24, 6, 24, 6),
                         child: TextFormField(
                           controller: cor,
@@ -232,13 +199,11 @@ class _CadastroCarroState extends State<CadastroCarro> {
                               formKey.currentState?.save();
                               if (marcaDigitado != null &&
                                   modeloDigitado != null &&
-                                  tipoDigitado != null &&
                                   corDigitado != null &&
                                   placaDigitado != null) {
                                 await presenter.addCarro(
                                     marcaDigitado!,
                                     modeloDigitado!,
-                                    tipoDigitado!,
                                     corDigitado!,
                                     placaDigitado!);
                                 Navigator.of(context).push(MaterialPageRoute(

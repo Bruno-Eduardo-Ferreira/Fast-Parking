@@ -4,5 +4,5 @@ abstract class ICadastroCarro {
   factory ICadastroCarro() => GetCadastroCarro();
 
   Future addCarro(
-      String marca, String modelo, String tipo, String cor, String placa);
+      String marca, String modelo, String cor, String placa);
 }

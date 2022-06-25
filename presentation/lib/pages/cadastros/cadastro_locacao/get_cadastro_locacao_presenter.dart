@@ -33,7 +33,7 @@ class GetCadastroLocacao implements ICadastroLocacao {
 
   @override
   Future addLocacao(DateTime dataInicio,
-      DateTime dataVencimento, String idUser, String idCarro, String formaPagamento) async {
+      DateTime dataVencimento, String idUser, String idCarro, String formaPagamento, String qtdParcelas, num valorTotal) async {
     await _firestore
         .collection('clientes')
         .doc(idUser)
@@ -44,6 +44,8 @@ class GetCadastroLocacao implements ICadastroLocacao {
       'dataInicio': dataInicio,
       'dataVencimento': dataVencimento,
       'formaPagamento': formaPagamento,
+      'quantidadeParcelas': qtdParcelas,
+      'valotTotal': valorTotal,
       'status': 'await',
     });
   }

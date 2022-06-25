@@ -26,15 +26,20 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
   String? dataPtVencimento;
   DateTime? dataAtual = DateTime.now();
   num? tempoDigitado;
+  num? multiplicadorTempo;
 
   String? selectedPagamento;
+  String? selectedParcelas;
   String? selectedDono;
   String? selectedCarro;
   String? selectedTempo;
   bool? flagTempo;
+  num? valorTotal;
+  num? valorParcela;
 
   final selectTempo = ['Dia', 'Mês'];
   final selectPagamento = ['à Vista', 'Cartão / crédito', 'Cartão / débito'];
+  final selectParcelas = ['1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x', '11x', '12x'];
 
   void attDono() {
     setState(() {
@@ -94,7 +99,7 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                 child: Form(
                   key: formKey,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                           padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
@@ -140,11 +145,11 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                                 hint: const Text("Selecione o veículo"),
                                 value: selectedCarro,
                                 items: presenter.carrosCadastrados
-                                    .map((username) {
+                                    .map((carroname) {
                                   return DropdownMenuItem(
-                                      value: username,
+                                      value: carroname,
                                       child: Text(
-                                        username,
+                                        carroname,
                                         style: const TextStyle(fontSize: 24),
                                       ));
                                 }).toList(),
@@ -158,54 +163,7 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             ],
                           ),
                           ),
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Pagamento:    ',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              DropdownButton(
-                                hint: const Text("Selecione a forma"),
-                                value: selectedPagamento,
-                                items: selectPagamento.map((petname) {
-                                  return DropdownMenuItem(
-                                      value: petname,
-                                      child: Text(
-                                        petname,
-                                        style: const TextStyle(fontSize: 24),
-                                      ));
-                                }).toList(),
-                                onChanged: (valuename) {
-                                  setState(() {
-                                    selectedPagamento = valuename as String;
-                                  });
-                                },
-                              ),
-                            ],
-                          )),
-                      // Padding(
-                      //   padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
-                      //   child: TextFormField(
-                      //       controller: nomeVacina,
-                      //       decoration: const InputDecoration(
-                      //         border: OutlineInputBorder(),
-                      //         labelText: 'Nome da vacina',
-                      //       ),
-                      //       keyboardType: TextInputType.name,
-                      //       validator: (value) {
-                      //         if (value!.isEmpty) {
-                      //           return 'Informe algum nome!';
-                      //         } else if (value.length > 80) {
-                      //           return 'São permitidos no máximo 80 caracteres para o nome!';
-                      //         }
-                      //         nomeVacinaDigitado = value;
-                      //         return null;
-                      //       }),
-                      // ),
-                      Padding(
+                          Padding(
                         padding: const EdgeInsets.fromLTRB(0, 12, 24, 12),
                         child: Text('Data de início: $dataPtInicio.',
                             style: const TextStyle(fontSize: 16)),
@@ -258,8 +216,10 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             }
                             if (flagTempo == true) {
                               tempoDigitado = num.parse(value);
+                              multiplicadorTempo = 1;
                             } else if (flagTempo == false) {
                               tempoDigitado = num.parse(value) * 30;
+                              multiplicadorTempo = 30;
                             } else {
                               return 'Informe o tempo no campo superior!';
                             }
@@ -268,6 +228,8 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             dataPtVencimento =
                                 DateFormat(DateFormat.YEAR_MONTH_DAY, 'pt_Br')
                                     .format(dataVencimento!);
+                            valorTotal = 25 * multiplicadorTempo! * num.parse(value);
+                                                        valorParcela = valorTotal! / num.parse(selectedParcelas!);
                             return null;
                           },
                         ),
@@ -278,6 +240,69 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             ? Text('Data de vencimento: $dataPtVencimento.',
                                 style: const TextStyle(fontSize: 16))
                             : const Text('Sem data de vencimento.'),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Pagamento:    ',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              DropdownButton(
+                                hint: const Text("Selecione a forma"),
+                                value: selectedPagamento,
+                                items: selectPagamento.map((pagamentoname) {
+                                  return DropdownMenuItem(
+                                      value: pagamentoname,
+                                      child: Text(
+                                        pagamentoname,
+                                        style: const TextStyle(fontSize: 24),
+                                      ));
+                                }).toList(),
+                                onChanged: (valuename) {
+                                  setState(() {
+                                    selectedPagamento = valuename as String;
+                                  });
+                                },
+                              ),
+                            ],
+                          )),
+                           Padding(
+                          padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Parcelas:    ',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              DropdownButton(
+                                hint: const Text("Selecione a quantidade"),
+                                value: selectedParcelas,
+                                items: selectParcelas.map((parcelasname) {
+                                  return DropdownMenuItem(
+                                      value: parcelasname,
+                                      child: Text(
+                                        parcelasname,
+                                        style: const TextStyle(fontSize: 24),
+                                      ));
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedParcelas = value as String;
+                                  });
+                                },
+                              ),
+                            ],
+                          )),
+                          Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                        child: dataPtVencimento != null
+                            ? Text('Valor total: $valorTotal ,00 R\$.',
+                                style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600))
+                            : const Text('Sem valor total.'),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(24, 32, 24, 12),
@@ -321,7 +346,9 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                                     dataVencimento!,
                                     presenter.idUser,
                                     presenter.idCarro,
-                                    selectedPagamento!);
+                                    selectedPagamento!,
+                                    selectedParcelas!,
+                                    valorTotal!);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => const HomePage()));
                               }
