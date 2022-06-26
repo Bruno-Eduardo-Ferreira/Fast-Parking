@@ -5,15 +5,15 @@ import 'package:intl/intl.dart';
 // ignore: avoid_relative_lib_imports
 import '../../../../../../presentation/lib/pages/consultas/consulta_notificacao/consulta_notificacao_presenter.dart';
 
-class ConsultaVacina extends StatefulWidget {
-  const ConsultaVacina({Key? key}) : super(key: key);
+class ConsultaNotificao extends StatefulWidget {
+  const ConsultaNotificao({Key? key}) : super(key: key);
 
   @override
-  State<ConsultaVacina> createState() => _ConsultaVacinaState();
+  State<ConsultaNotificao> createState() => _ConsultaNotificaoState();
 }
 
-class _ConsultaVacinaState extends State<ConsultaVacina> {
-  final IConsultaVacina presenter = IConsultaVacina();
+class _ConsultaNotificaoState extends State<ConsultaNotificao> {
+  final IConsultaNotificao presenter = IConsultaNotificao();
 
   DateTime dataAtual = DateTime.now();
   DateTime? dataNotificacao;
@@ -93,8 +93,7 @@ class _ConsultaVacinaState extends State<ConsultaVacina> {
                                     Radius.circular(6.0)),
                                 color: Colors.white,
                               ),
-                              child: cardVac(doc['idUser'], doc['nomeVacina'],
-                                  doc['nomePet'], doc['idPet'], doc.id),
+                              child: cardCarro(doc['idUser'], doc['idCarro'], doc.id, presenter.nome),
                             ),
                           );
                         }
@@ -106,22 +105,23 @@ class _ConsultaVacinaState extends State<ConsultaVacina> {
     );
   }
 
-  Widget cardVac(String idUser, String nomeVacina, String nomePet, String idPet,
-      String idVac) {
+  Widget cardCarro(String idUser, String idCarro,
+      String idLocacao, String nomeDono) {
     return Column(
       children: [
         GestureDetector(
           onTap: () async {
-            await presenter.getCelular(idUser);
+            await presenter.getCelularAndNome(idUser);
+            await presenter.getPlaca(idCarro);
             presenter.lauchWpp(
                 number: presenter.celularNotificacao,
                 message:
-                    "Olá ${presenter.nome}, a vacina: $nomeVacina, do seu pet: $nomePet, está para vencer na data de: $dataPtExibir");
+                    "Olá ${presenter.nome}, a locação do veículo de placa: ${presenter.placaCarro}, está para vencer na data de: $dataPtExibir");
             count++;
           },
           child: ListTile(
             title: Text(
-              nomeVacina,
+              nomeDono,
               style:
                   const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
             ),
@@ -178,7 +178,7 @@ class _ConsultaVacinaState extends State<ConsultaVacina> {
                     ),
                     TextButton(
                       onPressed: () {
-                        presenter.finishNotify(idVac, idUser, idPet);
+                        presenter.finishNotify(idCarro, idUser);
                         Navigator.pop(context, 'OK');
                       },
                       child: const Text(

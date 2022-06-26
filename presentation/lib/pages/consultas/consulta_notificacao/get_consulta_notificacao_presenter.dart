@@ -3,8 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'consulta_notificacao_presenter.dart';
 
-class GetConsultaVacina implements IConsultaVacina {
+class GetConsultaNotificao implements IConsultaNotificao {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String _placaCarro = '';
+  @override
+  String get placaCarro => _placaCarro;
+  @override
+  set placaCarro(String placaCarro) =>
+      _placaCarro = placaCarro;
 
   String _celularNotificacao = '';
   @override
@@ -21,7 +28,7 @@ class GetConsultaVacina implements IConsultaVacina {
 
   @override
   Stream<QuerySnapshot> getList() {
-    return _firestore.collectionGroup('vacinas').snapshots();
+    return _firestore.collectionGroup('locacoes').snapshots();
   }
 
   @override
@@ -33,28 +40,36 @@ class GetConsultaVacina implements IConsultaVacina {
   }
 
   @override
-  Future finishNotify(String idVac, String idUser, String idPet) async {
+  Future finishNotify(String idLocacao, String idUser) async {
     // ignore: unused_local_variable
     var collection = await _firestore
         .collection('clientes')
         .doc(idUser)
-        .collection('pets')
-        .doc(idPet)
-        .collection('vacinas')
-        .doc(idVac)
+        .collection('locacoes')
+        .doc(idLocacao)
         .update({
       'status': 'done',
     });
   }
 
   @override
-  Future getCelular(String idUser) async {
-    var colletion = FirebaseFirestore.instance.collection('clientes');
-    var result = await colletion.get();
-    for (var doc in result.docs) {
+  Future getCelularAndNome(String idUser) async {
+    var colletion = await _firestore.collection('clientes').get();
+    for (var doc in colletion.docs) {
       if (doc.id == idUser) {
         celularNotificacao = doc['celular'];
         nome = doc['nome'];
+      }
+    }
+  }
+
+    @override
+  Future getPlaca(String idCarro) async {
+    var colletion = await _firestore.collection('clientes').get();
+    for (var doc in colletion.docs) {
+      if (doc.id == idCarro) {
+        idCarro = doc.id;
+        placaCarro = doc['placa'];
       }
     }
   }

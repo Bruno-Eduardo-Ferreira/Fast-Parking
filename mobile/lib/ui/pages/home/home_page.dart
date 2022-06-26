@@ -296,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                   context,
                   PageRouteBuilder(
                       transitionDuration: const Duration(milliseconds: 500),
-                      pageBuilder: (_, __, ___) => const ConsultaVacina()));
+                      pageBuilder: (_, __, ___) => const ConsultaNotificao()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
