@@ -93,7 +93,8 @@ class _ConsultaNotificaoState extends State<ConsultaNotificao> {
                                     Radius.circular(6.0)),
                                 color: Colors.white,
                               ),
-                              child: cardCarro(doc['nomeUser'], doc['placaCarro'], doc['idUser'], doc.id),
+                              child: cardCarro(doc['nomeUser'],
+                                  doc['placaCarro'], doc['idUser'], doc.id),
                             ),
                           );
                         }
@@ -105,8 +106,8 @@ class _ConsultaNotificaoState extends State<ConsultaNotificao> {
     );
   }
 
-  Widget cardCarro(String nomeUser, String placaCarro, String idUser,
-      String idLocacao) {
+  Widget cardCarro(
+      String nomeUser, String placaCarro, String idUser, String idLocacao) {
     return Column(
       children: [
         GestureDetector(

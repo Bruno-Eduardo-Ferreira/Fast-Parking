@@ -32,8 +32,16 @@ class GetCadastroLocacao implements ICadastroLocacao {
       _carrosCadastrados = carrosCadastrados;
 
   @override
-  Future addLocacao(DateTime dataInicio,
-      DateTime dataVencimento, String idUser, String idCarro, String formaPagamento, String qtdParcelas, num valorTotal, String nomeUser, String placaCarro) async {
+  Future addLocacao(
+      DateTime dataInicio,
+      DateTime dataVencimento,
+      String idUser,
+      String idCarro,
+      String formaPagamento,
+      String qtdParcelas,
+      num valorTotal,
+      String nomeUser,
+      String placaCarro) async {
     await _firestore
         .collection('clientes')
         .doc(idUser)
@@ -51,7 +59,6 @@ class GetCadastroLocacao implements ICadastroLocacao {
       'status': 'await',
     });
   }
-
 
   @override
   Future getUsers(VoidCallback attdono) async {
@@ -78,8 +85,8 @@ class GetCadastroLocacao implements ICadastroLocacao {
   Future getCarros(VoidCallback attCarro) async {
     var colletion = await _firestore.collection('carros').get();
     for (var doc in colletion.docs) {
-        carrosCadastrados.add(doc['placa']);
-        attCarro();
+      carrosCadastrados.add(doc['placa']);
+      attCarro();
     }
   }
 

@@ -12,7 +12,8 @@ abstract class IEdicaoCliente {
   set celular(String celular);
   String get endereco;
   set endereco(String endereco);
-  
-  Future updateCliente(String nome, String cpf, String celular, String endereco, String idUser);
+
+  Future updateCliente(
+      String nome, String cpf, String celular, String endereco, String idUser);
   Future getCliente(VoidCallback atribuirDados, String idUser);
 }
