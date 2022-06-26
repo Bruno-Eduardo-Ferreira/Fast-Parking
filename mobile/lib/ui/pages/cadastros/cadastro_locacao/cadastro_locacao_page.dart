@@ -40,7 +40,20 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
 
   final selectTempo = ['Dia', 'Mês'];
   final selectPagamento = ['à Vista', 'Cartão / crédito', 'Cartão / débito'];
-  final selectParcelas = ['1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x', '11x', '12x'];
+  final selectParcelas = [
+    '1x',
+    '2x',
+    '3x',
+    '4x',
+    '5x',
+    '6x',
+    '7x',
+    '8x',
+    '9x',
+    '10x',
+    '11x',
+    '12x'
+  ];
 
   void attDono() {
     setState(() {
@@ -54,7 +67,7 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
     });
   }
 
-  void clearSelectPet(){
+  void clearSelectPet() {
     selectedPagamento = null;
   }
 
@@ -103,68 +116,68 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                          padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Dono da locação:    ',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              DropdownButton(
-                                hint: const Text("Selecione o dono"),
-                                value: selectedDono,
-                                items: presenter.clientesCadastrados
-                                    .map((username) {
-                                  return DropdownMenuItem(
-                                      value: username,
-                                      child: Text(
-                                        username,
-                                        style: const TextStyle(fontSize: 24),
-                                      ));
-                                }).toList(),
-                                onChanged: (valuename) {
-                                  setState(() {
-                                    selectedDono = valuename as String;
-                                  });
-                                  presenter.getUserID(selectedDono!);
-                                },
-                              ),
-                            ],
-                          ),
-                          ),
+                        padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Dono da locação:    ',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            DropdownButton(
+                              hint: const Text("Selecione o dono"),
+                              value: selectedDono,
+                              items:
+                                  presenter.clientesCadastrados.map((username) {
+                                return DropdownMenuItem(
+                                    value: username,
+                                    child: Text(
+                                      username,
+                                      style: const TextStyle(fontSize: 24),
+                                    ));
+                              }).toList(),
+                              onChanged: (valuename) {
+                                setState(() {
+                                  selectedDono = valuename as String;
+                                });
+                                presenter.getUserID(selectedDono!);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
-                          padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Veículo:    ',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              DropdownButton(
-                                hint: const Text("Selecione o veículo"),
-                                value: selectedCarro,
-                                items: presenter.carrosCadastrados
-                                    .map((carroname) {
-                                  return DropdownMenuItem(
-                                      value: carroname,
-                                      child: Text(
-                                        carroname,
-                                        style: const TextStyle(fontSize: 24),
-                                      ));
-                                }).toList(),
-                                onChanged: (valuename) {
-                                  setState(() {
-                                    selectedCarro = valuename as String;
-                                  });
-                                  presenter.getCarroID(selectedCarro!);
-                                },
-                              ),
-                            ],
-                          ),
-                          ),
-                          Padding(
+                        padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Veículo:    ',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            DropdownButton(
+                              hint: const Text("Selecione o veículo"),
+                              value: selectedCarro,
+                              items:
+                                  presenter.carrosCadastrados.map((carroname) {
+                                return DropdownMenuItem(
+                                    value: carroname,
+                                    child: Text(
+                                      carroname,
+                                      style: const TextStyle(fontSize: 24),
+                                    ));
+                              }).toList(),
+                              onChanged: (valuename) {
+                                setState(() {
+                                  selectedCarro = valuename as String;
+                                });
+                                presenter.getCarroID(selectedCarro!);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
                         padding: const EdgeInsets.fromLTRB(0, 12, 24, 12),
                         child: Text('Data de início: $dataPtInicio.',
                             style: const TextStyle(fontSize: 16)),
@@ -229,7 +242,8 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                             dataPtVencimento =
                                 DateFormat(DateFormat.YEAR_MONTH_DAY, 'pt_Br')
                                     .format(dataVencimento!);
-                            valorTotal = 25 * multiplicadorTempo! * num.parse(value);
+                            valorTotal =
+                                25 * multiplicadorTempo! * num.parse(value);
                             return null;
                           },
                         ),
@@ -269,7 +283,7 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                               ),
                             ],
                           )),
-                           Padding(
+                      Padding(
                           padding: const EdgeInsets.fromLTRB(44, 6, 24, 6),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -297,11 +311,12 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                               ),
                             ],
                           )),
-                          Padding(
+                      Padding(
                         padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
                         child: dataPtVencimento != null
                             ? Text('Valor total: $valorTotal ,00 R\$.',
-                                style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600))
+                                style: const TextStyle(
+                                    fontSize: 26, fontWeight: FontWeight.w600))
                             : const Text('Sem valor total.'),
                       ),
                       Padding(

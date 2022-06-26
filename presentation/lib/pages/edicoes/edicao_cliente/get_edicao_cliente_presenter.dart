@@ -30,13 +30,8 @@ class GetEdicaoCliente implements IEdicaoCliente {
   set endereco(String endereco) => _endereco = endereco;
 
   @override
-  Future updateCliente(
-    String nome,
-    String cpf,
-    String celular,
-    String endereco,
-    String idUser
-  ) async {
+  Future updateCliente(String nome, String cpf, String celular, String endereco,
+      String idUser) async {
     await _firestore.collection('clientes').doc(idUser).update({
       'nome': nome,
       'cpf': cpf,

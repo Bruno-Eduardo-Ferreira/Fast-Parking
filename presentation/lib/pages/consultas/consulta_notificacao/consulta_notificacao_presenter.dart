@@ -4,10 +4,9 @@ import 'get_consulta_notificacao_presenter.dart';
 
 abstract class IConsultaNotificao {
   factory IConsultaNotificao() => GetConsultaNotificao();
-  
+
   String get celularNotificacao;
   set celularNotificacao(String celularNotificacao);
-
 
   Stream<QuerySnapshot> getList();
   Future lauchWpp({@required number, @required message});

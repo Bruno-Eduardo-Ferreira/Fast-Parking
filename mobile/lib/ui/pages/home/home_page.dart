@@ -91,10 +91,12 @@ class _HomePageState extends State<HomePage> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 500),
-                      pageBuilder: (_, __, ___) => const CadastroCliente()));
+                                  context,
+                                  PageRouteBuilder(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 500),
+                                      pageBuilder: (_, __, ___) =>
+                                          const CadastroCliente()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -120,10 +122,12 @@ class _HomePageState extends State<HomePage> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 500),
-                      pageBuilder: (_, __, ___) => const CadastroCarro()));
+                                  context,
+                                  PageRouteBuilder(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 500),
+                                      pageBuilder: (_, __, ___) =>
+                                          const CadastroCarro()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -147,10 +151,12 @@ class _HomePageState extends State<HomePage> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 500),
-                      pageBuilder: (_, __, ___) => const CadastroLocacao()));
+                                  context,
+                                  PageRouteBuilder(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 500),
+                                      pageBuilder: (_, __, ___) =>
+                                          const CadastroLocacao()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -220,10 +226,12 @@ class _HomePageState extends State<HomePage> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 500),
-                      pageBuilder: (_, __, ___) => const ConsultaCliente()));
+                                  context,
+                                  PageRouteBuilder(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 500),
+                                      pageBuilder: (_, __, ___) =>
+                                          const ConsultaCliente()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -293,10 +301,12 @@ class _HomePageState extends State<HomePage> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      transitionDuration: const Duration(milliseconds: 500),
-                      pageBuilder: (_, __, ___) => const ConsultaNotificao()));
+                                  context,
+                                  PageRouteBuilder(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 500),
+                                      pageBuilder: (_, __, ___) =>
+                                          const ConsultaNotificao()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -358,7 +368,7 @@ class _HomePageState extends State<HomePage> {
               cadastro = true;
             } else if (flag == 1) {
               consulta = true;
-            } else if (flag == 0){
+            } else if (flag == 0) {
               notificacao = true;
             }
           },
