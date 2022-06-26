@@ -93,7 +93,7 @@ class _ConsultaNotificaoState extends State<ConsultaNotificao> {
                                     Radius.circular(6.0)),
                                 color: Colors.white,
                               ),
-                              child: cardCarro(doc['idUser'], doc['idCarro'], doc.id, presenter.nome),
+                              child: cardCarro(doc['nomeUser'], doc['placaCarro'], doc['idUser'], doc.id),
                             ),
                           );
                         }
@@ -105,23 +105,22 @@ class _ConsultaNotificaoState extends State<ConsultaNotificao> {
     );
   }
 
-  Widget cardCarro(String idUser, String idCarro,
-      String idLocacao, String nomeDono) {
+  Widget cardCarro(String nomeUser, String placaCarro, String idUser,
+      String idLocacao) {
     return Column(
       children: [
         GestureDetector(
           onTap: () async {
-            await presenter.getCelularAndNome(idUser);
-            await presenter.getPlaca(idCarro);
+            await presenter.getCelular(idUser);
             presenter.lauchWpp(
                 number: presenter.celularNotificacao,
                 message:
-                    "Olá ${presenter.nome}, a locação do veículo de placa: ${presenter.placaCarro}, está para vencer na data de: $dataPtExibir");
+                    "Olá $nomeUser, a locação do veículo de placa: $placaCarro, está para vencer na data de: $dataPtExibir");
             count++;
           },
           child: ListTile(
             title: Text(
-              nomeDono,
+              nomeUser,
               style:
                   const TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
             ),
@@ -178,7 +177,7 @@ class _ConsultaNotificaoState extends State<ConsultaNotificao> {
                     ),
                     TextButton(
                       onPressed: () {
-                        presenter.finishNotify(idCarro, idUser);
+                        presenter.finishNotify(idLocacao, idUser);
                         Navigator.pop(context, 'OK');
                       },
                       child: const Text(

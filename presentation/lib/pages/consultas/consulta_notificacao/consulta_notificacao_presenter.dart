@@ -4,17 +4,13 @@ import 'get_consulta_notificacao_presenter.dart';
 
 abstract class IConsultaNotificao {
   factory IConsultaNotificao() => GetConsultaNotificao();
-
-  String get placaCarro;
-  set placaCarro(String placaCarro);
+  
   String get celularNotificacao;
   set celularNotificacao(String celularNotificacao);
-  String get nome;
-  set nome(String nome);
+
 
   Stream<QuerySnapshot> getList();
   Future lauchWpp({@required number, @required message});
   Future finishNotify(String idLocacao, String idUser);
-  Future getCelularAndNome(String idUser);
-  Future getPlaca(String idCarro);
+  Future getCelular(String idUser);
 }

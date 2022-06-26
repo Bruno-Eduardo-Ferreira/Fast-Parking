@@ -6,25 +6,12 @@ import 'consulta_notificacao_presenter.dart';
 class GetConsultaNotificao implements IConsultaNotificao {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  String _placaCarro = '';
-  @override
-  String get placaCarro => _placaCarro;
-  @override
-  set placaCarro(String placaCarro) =>
-      _placaCarro = placaCarro;
-
   String _celularNotificacao = '';
   @override
   String get celularNotificacao => _celularNotificacao;
   @override
   set celularNotificacao(String celularNotificacao) =>
       _celularNotificacao = celularNotificacao;
-
-  String _nome = '';
-  @override
-  String get nome => _nome;
-  @override
-  set nome(String nome) => _nome = nome;
 
   @override
   Stream<QuerySnapshot> getList() {
@@ -53,23 +40,11 @@ class GetConsultaNotificao implements IConsultaNotificao {
   }
 
   @override
-  Future getCelularAndNome(String idUser) async {
+  Future getCelular(String idUser) async {
     var colletion = await _firestore.collection('clientes').get();
     for (var doc in colletion.docs) {
       if (doc.id == idUser) {
         celularNotificacao = doc['celular'];
-        nome = doc['nome'];
-      }
-    }
-  }
-
-    @override
-  Future getPlaca(String idCarro) async {
-    var colletion = await _firestore.collection('clientes').get();
-    for (var doc in colletion.docs) {
-      if (doc.id == idCarro) {
-        idCarro = doc.id;
-        placaCarro = doc['placa'];
       }
     }
   }

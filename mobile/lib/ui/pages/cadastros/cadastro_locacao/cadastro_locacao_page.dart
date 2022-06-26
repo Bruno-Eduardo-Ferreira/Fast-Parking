@@ -33,6 +33,7 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
   String? selectedDono;
   String? selectedCarro;
   String? selectedTempo;
+
   bool? flagTempo;
   num? valorTotal;
   num? valorParcela;
@@ -229,7 +230,6 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                                 DateFormat(DateFormat.YEAR_MONTH_DAY, 'pt_Br')
                                     .format(dataVencimento!);
                             valorTotal = 25 * multiplicadorTempo! * num.parse(value);
-                                                        valorParcela = valorTotal! / num.parse(selectedParcelas!);
                             return null;
                           },
                         ),
@@ -340,7 +340,9 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                               formKey.currentState?.save();
                               if (selectedPagamento != null &&
                                   dataInicio != null &&
-                                  dataVencimento != null) {
+                                  dataVencimento != null &&
+                                  selectedDono != null &&
+                                  selectedCarro != null) {
                                 await presenter.addLocacao(
                                     dataInicio!,
                                     dataVencimento!,
@@ -348,7 +350,9 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
                                     presenter.idCarro,
                                     selectedPagamento!,
                                     selectedParcelas!,
-                                    valorTotal!);
+                                    valorTotal!,
+                                    selectedDono!,
+                                    selectedCarro!);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => const HomePage()));
                               }

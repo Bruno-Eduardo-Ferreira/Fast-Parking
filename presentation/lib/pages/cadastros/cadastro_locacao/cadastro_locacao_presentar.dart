@@ -14,7 +14,7 @@ abstract class ICadastroLocacao {
   set carrosCadastrados(List<dynamic> carrosCadastrados);
 
   Future addLocacao(DateTime dataInicio,
-      DateTime dataVencimento, String idUser, String idCarro, String formaPagamento, String qtdParcelas, num valorTotal);
+      DateTime dataVencimento, String idUser, String idCarro, String formaPagamento, String qtdParcelas, num valorTotal, String nomeUser, String placaCarro);
   Future getUsers(VoidCallback attdono);
   Future getCarros(VoidCallback attCarro);
   Future getUserID(String user);
