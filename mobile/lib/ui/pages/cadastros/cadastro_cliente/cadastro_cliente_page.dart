@@ -36,7 +36,7 @@ class _CadastroClienteState extends State<CadastroCliente> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Cadastro de clientes',
+              'Cadastro de cliente',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             Hero(
