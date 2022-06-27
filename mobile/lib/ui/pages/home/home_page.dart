@@ -4,6 +4,7 @@ import '../../../services/auth_service.dart';
 import '../cadastros/cadastro_carro/cadastro_carro_page.dart';
 import '../cadastros/cadastro_cliente/cadastro_cliente_page.dart';
 import '../cadastros/cadastro_locacao/cadastro_locacao_page.dart';
+import '../consultas/consulta_carro/consulta_carro_page.dart';
 import '../consultas/consulta_cliente/consulta_cliente_page.dart';
 import '../consultas/consulta_notificacao/consulta_notificacao_page.dart';
 
@@ -214,7 +215,7 @@ class _HomePageState extends State<HomePage> {
               ),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
-                height: consulta ? 70 : 0,
+                height: consulta ? 130 : 0,
                 curve: Curves.easeInOut,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 32, right: 32),
@@ -241,6 +242,35 @@ class _HomePageState extends State<HomePage> {
                                   padding: EdgeInsets.all(8),
                                   child: Text(
                                     'Consultar cliente',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 500),
+                                      pageBuilder: (_, __, ___) =>
+                                          const ConsultaCarro()));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.account_box_rounded),
+                                Padding(
+                                  padding: EdgeInsets.all(8),
+                                  child: Text(
+                                    'Consultar Carro',
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),

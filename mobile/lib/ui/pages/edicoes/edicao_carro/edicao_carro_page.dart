@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 // ignore: avoid_relative_lib_imports
-import '../../../../../../presentation/lib/pages/cadastros/cadastro_carro/cadastro_carro_presenter.dart';
+import '../../../../../../presentation/lib/pages/edicoes/edicao_carro/edicao_carro_presenter.dart';
 import '../../home/home_page.dart';
 
-class CadastroCarro extends StatefulWidget {
-  const CadastroCarro({Key? key}) : super(key: key);
+class EdicaoCarro extends StatefulWidget {
+    final String idCarro;
+  const EdicaoCarro({Key? key, required this.idCarro}) : super(key: key);
 
   @override
-  State<CadastroCarro> createState() => _CadastroCarroState();
+  State<EdicaoCarro> createState() => _EdicaoCarroState();
 }
 
-class _CadastroCarroState extends State<CadastroCarro> {
-  final ICadastroCarro presenter = ICadastroCarro();
+class _EdicaoCarroState extends State<EdicaoCarro> {
+  final IEdicaoCarro presenter = IEdicaoCarro();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final marca = TextEditingController();
   final modelo = TextEditingController();
@@ -73,6 +74,21 @@ class _CadastroCarroState extends State<CadastroCarro> {
   String? selectedTipo;
   String? selectedMarca;
 
+  void dadosExistentes() {
+    setState(() {
+      selectedMarca = presenter.marca;
+      modelo.text = presenter.modelo;
+      cor.text = presenter.cor;
+      placa.text = presenter.placa;
+    });
+  }
+
+   @override
+  void initState() {
+    presenter.getCarro(dadosExistentes, widget.idCarro);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +97,7 @@ class _CadastroCarroState extends State<CadastroCarro> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Cadastro de veículo',
+              'Edição de veículo',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             Hero(
@@ -201,11 +217,12 @@ class _CadastroCarroState extends State<CadastroCarro> {
                                   modeloDigitado != null &&
                                   corDigitado != null &&
                                   placaDigitado != null) {
-                                await presenter.addCarro(
+                                await presenter.updateCarro(
                                     marcaDigitado!,
                                     modeloDigitado!,
                                     corDigitado!,
-                                    placaDigitado!);
+                                    placaDigitado!,
+                                    widget.idCarro);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => const HomePage()));
                               }
@@ -220,7 +237,7 @@ class _CadastroCarroState extends State<CadastroCarro> {
                               Padding(
                                 padding: EdgeInsets.all(16),
                                 child: Text(
-                                  'Cadastrar veículo',
+                                  'Editar veículo',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),

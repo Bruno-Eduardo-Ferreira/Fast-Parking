@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 // ignore: avoid_relative_lib_imports
-import '../../../../../../presentation/lib/pages/consultas/consulta_cliente/consulta_cliente_presenter.dart';
-import '../../edicoes/edicao_cliente/edicao_cliente_page.dart';
+import '../../../../../../presentation/lib/pages/consultas/consulta_carro/consulta_carro_presenter.dart';
+import '../../edicoes/edicao_carro/edicao_carro_page.dart';
 
-class ConsultaCliente extends StatefulWidget {
-  const ConsultaCliente({Key? key}) : super(key: key);
+class ConsultaCarro extends StatefulWidget {
+  const ConsultaCarro({Key? key}) : super(key: key);
 
   @override
-  State<ConsultaCliente> createState() => _ConsultaClienteState();
+  State<ConsultaCarro> createState() => _ConsultaCarroState();
 }
 
-class _ConsultaClienteState extends State<ConsultaCliente> {
-  final IConsultaCliente presenter = IConsultaCliente();
+class _ConsultaCarroState extends State<ConsultaCarro> {
+  final IConsultaCarro presenter = IConsultaCarro();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Consulta de clientes',
+              'Consulta de veículos',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             Hero(
@@ -55,7 +55,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
                 case ConnectionState.done:
                   if (snapshot.data!.docs.isEmpty) {
                     return const Center(
-                      child: Text('Não possui clientes cadastrado'),
+                      child: Text('Não possui veículos cadastrado'),
                     );
                   }
 
@@ -75,7 +75,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
                               color: Colors.white,
                             ),
                             child: cardCliente(
-                                doc.id, doc['nome'], doc['celular']),
+                                doc.id, doc['placa'], doc['marca']),
                           ),
                         );
                       });
@@ -85,14 +85,14 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
     );
   }
 
-  Widget cardCliente(String idUser, String nome, String celular) {
+  Widget cardCliente(String idCarro, String placa, String marca) {
     return Column(
       children: [
         GestureDetector(
           onTap: () async {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => EdicaoCliente(
-                      idUser: idUser,
+                builder: (context) => EdicaoCarro(
+                      idCarro: idCarro,
                     )));
           },
           child: ListTile(
@@ -100,7 +100,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  nome,
+                  placa,
                   style: const TextStyle(
                       fontSize: 22.0, fontWeight: FontWeight.w600),
                 ),
@@ -132,7 +132,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
                           ],
                         ),
                         content: const Text(
-                          'Você tem certeza que deseja excluir permanentemente o cadastro desse cliente?',
+                          'Você tem certeza que deseja excluir permanentemente o cadastro desse veículo?',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
                         ),
@@ -147,7 +147,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
                           ),
                           TextButton(
                             onPressed: () {
-                              presenter.deleteUser(idUser);
+                              presenter.deleteCarro(idCarro);
                               Navigator.pop(context, 'OK');
                             },
                             child: const Text(
@@ -169,7 +169,7 @@ class _ConsultaClienteState extends State<ConsultaCliente> {
               ],
             ),
             subtitle: Text(
-              'Celular: $celular',
+              'Marca: $marca',
               style: const TextStyle(
                   fontSize: 15.0, height: 2, fontWeight: FontWeight.w600),
             ),
