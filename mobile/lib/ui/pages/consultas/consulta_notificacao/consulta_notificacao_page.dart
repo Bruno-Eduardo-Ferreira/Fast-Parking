@@ -69,7 +69,7 @@ class _ConsultaNotificaoState extends State<ConsultaNotificao> {
                   if (snapshot.data!.docs.isEmpty) {
                     return const Center(
                       child:
-                          Text('Não possui vacinas para notificar vencimento.'),
+                          Text('Não possui locação para notificar vencimento.'),
                     );
                   }
                   return ListView.builder(
