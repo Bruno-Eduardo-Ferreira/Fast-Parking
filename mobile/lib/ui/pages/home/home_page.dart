@@ -266,11 +266,11 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Icon(Icons.account_box_rounded),
+                                Icon(Icons.car_repair_outlined),
                                 Padding(
                                   padding: EdgeInsets.all(8),
                                   child: Text(
-                                    'Consultar Carro',
+                                    'Consultar veículo',
                                     style: TextStyle(fontSize: 15),
                                   ),
                                 ),

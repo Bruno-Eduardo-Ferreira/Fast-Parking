@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: avoid_relative_lib_imports
 import '../../../../../../presentation/lib/pages/edicoes/edicao_carro/edicao_carro_presenter.dart';
+import '../../consultas/consulta_carro/consulta_carro_page.dart';
 import '../../home/home_page.dart';
 
 class EdicaoCarro extends StatefulWidget {
@@ -223,8 +224,11 @@ class _EdicaoCarroState extends State<EdicaoCarro> {
                                     corDigitado!,
                                     placaDigitado!,
                                     widget.idCarro);
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => const HomePage()));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const ConsultaCarro()));
                               }
                             } else {
                               FocusManager.instance.primaryFocus?.unfocus();
