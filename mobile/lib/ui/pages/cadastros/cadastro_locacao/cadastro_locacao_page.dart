@@ -15,7 +15,6 @@ class CadastroLocacao extends StatefulWidget {
 class _CadastroLocacaoState extends State<CadastroLocacao> {
   final ICadastroLocacao presenter = ICadastroLocacao();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final nomeVacina = TextEditingController();
   final dataAplicadoCotroller = TextEditingController();
   final dataVencimentoController = TextEditingController();
   final dias = TextEditingController();
@@ -65,10 +64,6 @@ class _CadastroLocacaoState extends State<CadastroLocacao> {
     setState(() {
       presenter.carrosCadastrados;
     });
-  }
-
-  void clearSelectPet() {
-    selectedPagamento = null;
   }
 
   @override
